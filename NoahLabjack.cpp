@@ -22,10 +22,15 @@
 // For time
 #include <chrono>
 
+NoahLabjack::NoahLabjack() {
 
-int NoahLabjack::start() {
-	int err;
-	int handle;
+	// Open first found LabJack
+	err = LJM_Open(LJM_dtANY, LJM_ctANY, "LJM_idANY", &handle);
+	ErrorCheck(err, "LJM_Open");
+
+}
+
+void NoahLabjack::start() {
 	int i;
 	int errorAddress = INITIAL_ERR_ADDRESS;
 	int skippedIntervals;
@@ -44,16 +49,13 @@ int NoahLabjack::start() {
 	const char* aNames[MAX_FRAMES];
 	double aValues[MAX_FRAMES];
 
-	uint64_t timeSinceEpochMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-
-	// Open first found LabJack
-	err = LJM_Open(LJM_dtANY, LJM_ctANY, "LJM_idANY", &handle);
-	ErrorCheck(err, "LJM_Open");
-
 	PrintDeviceInfoFromHandle(handle);
 	printf("\n");
 
 	deviceType = GetDeviceType(handle);
+
+	uint64_t timeSinceEpochMilliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+
 
 	// eventually create separate csv files for analog and digital info
 
@@ -113,5 +115,4 @@ int NoahLabjack::start() {
 
 	dataFile.close();
 
-	return LJME_NOERROR;
 }

@@ -3,12 +3,18 @@
  * program used for Watson Lab data collection via Labjack T7.
 **/
 
-
+enum { MAX_FRAMES = 10 };
+#define INITIAL_ERR_ADDRESS -2;
 
 
 class NoahLabjack
 {
 public:
-	int start();
+	NoahLabjack();
+
+	void start();
+
+	int err;
+	int handle;
 };
 

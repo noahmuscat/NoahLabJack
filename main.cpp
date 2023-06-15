@@ -20,7 +20,7 @@
 // For LabJackM helper functions, such as OpenOrDie, PrintDeviceInfoFromHandle,
 // ErrorCheck, etc., such as OpenOrDie, PrintDeviceInfoFromHandle,
 // ErrorCheck, etc.
-// #include "LJM_Utilities.h"
+ //#include "LJM_Utilities.h"
 
 // For time
 //#include <chrono>
@@ -29,7 +29,10 @@
 
 int main()
 {
+
 	NoahLabjack david;
 
 	david.start();
+
+	
 }
