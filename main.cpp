@@ -29,10 +29,16 @@
 
 int main()
 {
+	// add while (1) loop that constantly checks for lights on or off as well as checks for high/low trigger (if triggered, run LJ)
+
 
 	NoahLabjack david;
+	//david.start();
 
-	david.start();
-
+	
+	if (david.triggerCheck()) {
+		david.start();
+	}
+	
 	
 }

@@ -12,6 +12,7 @@ class NoahLabjack
 public:
 	NoahLabjack();
 
+	bool triggerCheck();
 	void start();
 
 	int err;
