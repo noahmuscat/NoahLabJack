@@ -82,8 +82,6 @@ bool NoahLabjack::triggerCheck() {
 		}
 		printf("\n");
 
-		//++it;
-
 		// waiting for next iteration of data
 		err = LJM_WaitForNextInterval(INTERVAL_HANDLE, &skippedIntervals);
 		ErrorCheck(err, "LJM_WaitForNextInterval");
@@ -178,8 +176,6 @@ void NoahLabjack::start() {
 
 		// for csv file
 		dataFile << timeSinceEpochMilliseconds << "," << aValues[0] << "," << aValues[1] << "," << aValues[2] << std::endl;
-
-		//++it;
 
 		// waiting for next iteration of data
 		err = LJM_WaitForNextInterval(INTERVAL_HANDLE, &skippedIntervals);
