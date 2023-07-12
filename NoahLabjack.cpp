@@ -96,7 +96,6 @@ bool NoahLabjack::triggerCheck() {
 		}
 
 		if (aValues[0] == 0.0 && ctrlVar == 1.0) {
-			printf("EPICPIEPIFUEPOIURPOIUEPIRUW");
 			return true;
 		}
 	}
