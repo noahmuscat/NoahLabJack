@@ -17,5 +17,6 @@ public:
 
 	int err;
 	int handle;
+	int deviceType;
 };
 
