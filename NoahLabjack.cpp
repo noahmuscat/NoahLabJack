@@ -120,13 +120,9 @@ void NoahLabjack::start() {
 	int deviceType;
 
 	const int INTERVAL_HANDLE = 1;
-	int it = 0;
 
 	// interval time (ms)
 	int msDelay = 100;
-
-	// hopefully 10 ports is fine
-	//enum { MAX_FRAMES = 10 };
 
 	int numFrames;
 	const char* aNames[MAX_FRAMES];
