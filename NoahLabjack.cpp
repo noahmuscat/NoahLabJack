@@ -27,8 +27,32 @@ NoahLabjack::NoahLabjack() {
 	// Open first found LabJack
 	err = LJM_Open(LJM_dtANY, LJM_ctANY, "LJM_idANY", &handle);
 	ErrorCheck(err, "LJM_Open");
-	deviceType = GetDeviceType(handle);
 
+	deviceType = GetDeviceType(handle);
+	msDelay = 100;
+	numFrames = 1;
+	
+	for (int i = 0; i < numFrames; i++) {
+		aNames[i] = " ";
+		aValues[i] = 2.3;
+	}
+}
+
+NoahLabjack::NoahLabjack(int frameNum, const char* names[MAX_FRAMES]) {
+
+	// Open first found LabJack
+	err = LJM_Open(LJM_dtANY, LJM_ctANY, "LJM_idANY", &handle);
+	ErrorCheck(err, "LJM_Open");
+
+	deviceType = GetDeviceType(handle);
+	msDelay = 100;
+	numFrames = frameNum;
+
+	for (int i = 0; i < numFrames; i++) {
+		aNames[i] = names[i];
+		aValues[i] = 2.3;
+	}
+	// would probably format so that the trigger channel is input first, so we know which to assign as the trigger channel
 }
 
 bool NoahLabjack::triggerCheck() {
@@ -36,19 +60,7 @@ bool NoahLabjack::triggerCheck() {
 	int i;
 	int errorAddress = INITIAL_ERR_ADDRESS;
 	int skippedIntervals;
-
 	const int INTERVAL_HANDLE = 1;
-	int it = 0;
-
-	// interval time (ms)
-	int msDelay = 100;
-
-	// hopefully 10 ports is fine
-	//enum { MAX_FRAMES = 10 };
-
-	int numFrames;
-	const char* aNames[MAX_FRAMES];
-	double aValues[MAX_FRAMES];
 
 	PrintDeviceInfoFromHandle(handle);
 	printf("\n");
@@ -66,7 +78,6 @@ bool NoahLabjack::triggerCheck() {
 
 	while (1) {
 		// configures one port for the trigger check
-		numFrames = 1;
 		aNames[0] = "FIO2";
 		// reads in values
 		err = LJM_eReadNames(handle, numFrames, (const char**)aNames, aValues,
@@ -115,16 +126,7 @@ void NoahLabjack::start() {
 	int i;
 	int errorAddress = INITIAL_ERR_ADDRESS;
 	int skippedIntervals;
-	int deviceType;
-
 	const int INTERVAL_HANDLE = 1;
-
-	// interval time (ms)
-	int msDelay = 100;
-
-	int numFrames;
-	const char* aNames[MAX_FRAMES];
-	double aValues[MAX_FRAMES];
 
 	PrintDeviceInfoFromHandle(handle);
 	printf("\n");
